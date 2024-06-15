@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 class Square extends React.Component {
     render() {
-      return (
-        <button className="square">
-          {this.props.value}
+        return (
+            <button className="square" onClick={() => this.props.onClick()}>
+              {this.props.value}
         </button>
       );
     }
@@ -16,9 +16,18 @@ class Square extends React.Component {
   // Example usage: <ShoppingList name="Mark" />
 
   class Board extends React.Component {
-    renderSquare(i) {
-        return <Square value={i} />;
+    constructor() {
+        super();
+        this.state = {
+            squares: Array(9).fill(null),
+        }
     }
+
+    renderSquare(i) {
+        return <Square value={this.state.squares[i]}
+        onClick={() => this.handleClick(i)}
+         />;
+        }
   
     render() {
       const status = 'Next player: X';
